@@ -16,7 +16,7 @@ echo '</td><td>';
 
 echo '...';
 
-echo '</td></tr></table><br><center><i>CryptoManager V '.$v->GetCurrentVersion().'</i></center>
+echo '</td></tr></table><br><center><i>CryPi V '.$v->GetCurrentVersion().'</i></center>
 </body>
 </html>';
 
