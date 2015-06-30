@@ -1,3 +1,3 @@
-<li><a href="?do=configs">Manage configs</a></li>
+<li><a href="?do=configs">Manage VPN configs</a></li>
 <br>
-<li><a href="?do=connection">Manage connection</a></li>
+<li><a href="?do=connection">Manage VPN connection</a></li>
