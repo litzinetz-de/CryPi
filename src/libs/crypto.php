@@ -9,9 +9,20 @@ class crypto
 		
 	}
 	
-	private function mnt_container()
+	private function cleanup_filename($filename)
 	{
-
+		return preg_replace(“/[^a-z0-9\.]/”, “”, strtolower($filename));
+	}
+	
+	private function create_container($pwd,$cont_name)
+	{
+		$cont_path=VPN_CONF_CONTAINER_DIR+$this->cleanup_filename($cont_name);
+		$runcmd='/usr/bin/truecrypt --non-interactive --encryption=AES --hash=SHA-512 --filesystem=EXT4 --password=asdf -c '.$cont_path.' --size=100000000';
+	}
+	
+	private function mount_container($pwd,$cont_name)
+	{
+		//
 	}
 }
 ?>
