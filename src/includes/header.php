@@ -9,7 +9,7 @@
 <td colspan="3">&nbsp;</td>
 </tr><tr>
 <td align="center">
-<div class="middle">&nbsp;<br>CryoPi<br>&nbsp;</div>
+<div class="middle">&nbsp;<br>CryPi<br>&nbsp;</div>
 </td>
 </tr>
 <tr class="tableheader">

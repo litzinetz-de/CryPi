@@ -7,6 +7,10 @@ define('MYSQL_DB','crypto');
 define('TC_BIN','/usr/bin/truecrypt');
 define('OVPN_BIN','/usr/sbin/openvpn');
 
-define('VPN_CONF_CONTAINER_DIR','/crypi/vpn/');
-define('VPN_CONF_MNT_DIR','/crypi/vpn-mnt/');
+define('VPN_CONF_BASEDIR','/crypi/');
+
+/////
+
+define('VPN_CONF_ENC',VPN_CONF_BASEDIR.'enc/');
+define('VPN_CONF_MNT',VPN_CONF_BASEDIR.'mnt/');
 ?>
