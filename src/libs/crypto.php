@@ -36,7 +36,7 @@ class crypto
 	public function mount_container($pwd,$cont_name)
 	{
 		$cont_path=VPN_CONF_ENC.$this->cleanup_filename($cont_name);
-		$runcmd=TC_BIN.' --non-interactive '.$cont_path.' '.VPN_CONF_MNT.' -p "'.$pwd.'"';
+		$runcmd='sudo '.TC_BIN.' --non-interactive '.$cont_path.' '.VPN_CONF_MNT.' -p "'.$pwd.'"';
 		
 		exec($runcmd,$cmd_output,$return_var);
 		
@@ -62,6 +62,24 @@ class crypto
 			// Handle error
 			return false;
 		}
+	}
+	
+	public function container_mounted()
+	{
+		$runcmd=TC_BIN.' -l';
+		exec($runcmd,$cmd_output,$return_var);
+		
+		foreach($cmd_output as $line)
+		{
+			$pos = strpos($line, rtrim(VPN_CONF_MNT,'/'));
+			if ($pos === false)
+			{
+				//
+			} else {
+				return true;
+			}
+		}
+		return false;
 	}
 }
 ?>
