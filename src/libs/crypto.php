@@ -81,5 +81,46 @@ class crypto
 		}
 		return false;
 	}
+	
+	public function ReadConfigs($dir)
+	{
+		$configlist=array();
+		//array_push($configlist,'test1');
+		$handle=opendir($dir);
+		while($file=readdir($handle))
+		{
+			if($file!='.' && $file!='..')
+			{
+				$fullpath=$dir.'/'.$file;
+				//echo 'Processing '.$fullpath."\n";
+				if(is_dir($fullpath))
+				{
+					//echo "is dir\n";
+					$configlist=array_merge($configlist,$this->ReadConfigs($fullpath));
+				} else {
+					//echo $fullpath." is file\n";
+					if(preg_match('/.*\.ovpn/i',$file))
+					{
+						array_push($configlist,$fullpath);
+					}
+					//print_r($configlist);
+				}
+			}
+		}
+		//array_push($configlist,'test2');
+		//print_r($configlist);
+		//echo "end.\n\n";
+		return $configlist;
+	}
+	
+	public function FindConfigs()
+	{
+		if(!$this->container_mounted())
+		{
+			return false;
+		}
+		
+		
+	}
 }
 ?>
