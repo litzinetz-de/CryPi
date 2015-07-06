@@ -122,5 +122,48 @@ class crypto
 		
 		
 	}
+	
+		public function AddCredentials($username,$password)
+	{
+		if(!$this->container_mounted())
+		{
+			return false;
+		}
+		file_put_contents(VPN_CONF_MNT.'cred.dat',$username."\n".$password) or die('Error writing cred.dat');
+		
+		// TODO: Read list of ovpn files into array $ovpn_list. For testing purposes, we make it static
+		$ovpn_list=array('/crypi/mnt/testvpn/testvpn.ovpn');
+		
+		foreach($ovpn_list as $ovpn)
+		{
+			$fh=fopen($ovpn,'a');
+			fwrite($fh,"auth-user-pass ".VPN_CONF_MNT."cred.dat");
+			fclose($fh);
+		}
+	}
+	
+	public function VPNConnected()
+	{
+		exec('ip link show dev tun0 2> /dev/null',$cmd_output,$return_var);
+		if($return_var==0)
+		{
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public function KillVPN()
+	{
+		exec('sudo '.PKILL_BIN.' openvpn');
+	}
+	
+	public function StartVPN($configfile)
+	{
+		chdir(dirname($configfile));
+		//$cmd='cd '.dirname($configfile).' && sudo '.OVPN_BIN.' '.$configfile.' 2> '.CRYPI_LOGFILE.' &';
+		exec('sudo '.OVPN_BIN.' '.$configfile.' > /dev/null 2>&1 &');
+		//exec(sprintf("%s > %s 2>&1 & echo $! >> %s", $cmd, CRYPI_LOGFILE, OVPN_PIDFILE));
+	}
 }
 ?>
