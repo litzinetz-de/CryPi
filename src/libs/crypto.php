@@ -82,7 +82,7 @@ class crypto
 		return false;
 	}
 	
-	public function ReadConfigs($dir)
+	private function ReadConfigs($dir)
 	{
 		$configlist=array();
 		//array_push($configlist,'test1');
@@ -120,7 +120,7 @@ class crypto
 			return false;
 		}
 		
-		
+		return $this->ReadConfigs(VPN_CONF_MNT);
 	}
 	
 	public function AddCredentials($username,$password)
