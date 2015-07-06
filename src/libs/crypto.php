@@ -123,7 +123,7 @@ class crypto
 		
 	}
 	
-		public function AddCredentials($username,$password)
+	public function AddCredentials($username,$password)
 	{
 		if(!$this->container_mounted())
 		{
