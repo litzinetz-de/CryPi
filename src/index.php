@@ -14,7 +14,7 @@ require('includes/navigation.php');
 
 echo '</td><td>';
 
-echo '...';
+
 
 echo '</td></tr></table><br><center><i>CryPi V '.$v->GetCurrentVersion().'</i></center>
 </body>
