@@ -1,23 +1,23 @@
 <?php
 require('libs/versionmanager.php');
 require('libs/crypto.php');
+require('libs/gui.php');
 
 $v = new version();
 $c = new crypto();
+$g = new gui($v->GetCurrentVersion());
 
-require('includes/header.php');
+$g->GlobalHeader();
 
-echo '<br><table width="100%" border="0"><tr>
-<td width="20%">';
-
-require('includes/navigation.php');
+$g->GlobalNavigation();
 
 echo '</td><td>';
 
+if($_GET['do']=='')
+{
+	$g->IndexPage();
+}
 
-
-echo '</td></tr></table><br><center><i>CryPi V '.$v->GetCurrentVersion().'</i></center>
-</body>
-</html>';
+$g->GlobalFooter();
 
 ?>

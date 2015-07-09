@@ -14,9 +14,30 @@ class crypto
 		return preg_replace("/[^a-z0-9\.]/", "", strtolower($filename));
 	}
 	
+	public function ReadContainers()
+	{
+		$containerlist=array();
+		$handle=opendir(VPN_CONF_ENC);
+		while($file=readdir($handle))
+		{
+			if($file!='.' && $file!='..')
+			{
+				$fullpath=$dir.'/'.$file;
+				if(!is_dir($fullpath))
+				{
+					if(preg_match('/.*\.crypi/i',$file))
+					{
+						array_push($containerlist,$file);
+					}
+				}
+			}
+		}
+		return $containerlist;
+	}
+	
 	public function create_container($pwd,$cont_name)
 	{
-		$cont_path=VPN_CONF_ENC.$this->cleanup_filename($cont_name);
+		$cont_path=VPN_CONF_ENC.$this->cleanup_filename($cont_name).'.crypi';
 		//$cont_path=VPN_CONF_ENC+$this->cleanup_filename($cont_name);
 		$runcmd=TC_BIN.' -t --size=200000000 --password="'.$pwd.'" -k "" --random-source=/dev/urandom --volume-type=normal --encryption=AES --hash=SHA-512 --filesystem=FAT -c '.$cont_path;
 		
@@ -92,24 +113,17 @@ class crypto
 			if($file!='.' && $file!='..')
 			{
 				$fullpath=$dir.'/'.$file;
-				//echo 'Processing '.$fullpath."\n";
 				if(is_dir($fullpath))
 				{
-					//echo "is dir\n";
 					$configlist=array_merge($configlist,$this->ReadConfigs($fullpath));
 				} else {
-					//echo $fullpath." is file\n";
 					if(preg_match('/.*\.ovpn/i',$file))
 					{
 						array_push($configlist,$fullpath);
 					}
-					//print_r($configlist);
 				}
 			}
 		}
-		//array_push($configlist,'test2');
-		//print_r($configlist);
-		//echo "end.\n\n";
 		return $configlist;
 	}
 	
