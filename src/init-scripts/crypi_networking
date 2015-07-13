@@ -1,0 +1,36 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          crypi_networking
+# Required-Start:    $local_fs $network $named $time $syslog
+# Required-Stop:     $local_fs $network $named $time $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Description:       Sets IPv4 addresses like configured in CryPi settings
+### END INIT INFO
+ 
+start() {
+  net_addr=`cat /crypi/data/networking_addr.dat`
+  net_mask=`cat /crypi/data/networking_mask.dat`
+  net_gw=`cat /crypi/data/networking_gateway.dat`
+  sudo /sbin/ifconfig eth0 $net_addr netmask $net_mask
+  sudo /sbin/route add default gw $net_gw
+}
+ 
+stop() {
+  echo "Nothing to do here..."
+}
+ 
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  retart)
+    //stop
+    start
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart}"
+esac
