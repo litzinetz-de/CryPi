@@ -17,6 +17,14 @@ if($_GET['do']=='')
 {
 	$g->IndexPage();
 }
+if($_GET['do']=='system')
+{
+	if($_GET['write']!='y')
+	{
+		$buffer=$c->GetNetworkSettings();
+		$g->SystemSettingsPage($buffer['addr'],$buffer['mask'],$buffer['gateway']);
+	}
+}
 
 $g->GlobalFooter();
 

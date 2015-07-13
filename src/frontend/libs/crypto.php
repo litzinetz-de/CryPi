@@ -145,8 +145,10 @@ class crypto
 		}
 		file_put_contents(VPN_CONF_MNT.'cred.dat',$username."\n".$password) or die('Error writing cred.dat');
 		
-		// TODO: Read list of ovpn files into array $ovpn_list. For testing purposes, we make it static
-		$ovpn_list=array('/crypi/mnt/testvpn/testvpn.ovpn');
+		if(!$ovpn_list=$this->FindConfigs())
+		{
+			die('Could not read config list. Maybe no container mounted?');
+		}
 		
 		foreach($ovpn_list as $ovpn)
 		{
@@ -178,6 +180,37 @@ class crypto
 		//$cmd='cd '.dirname($configfile).' && sudo '.OVPN_BIN.' '.$configfile.' 2> '.CRYPI_LOGFILE.' &';
 		exec('sudo '.OVPN_BIN.' '.$configfile.' > /dev/null 2>&1 &');
 		//exec(sprintf("%s > %s 2>&1 & echo $! >> %s", $cmd, CRYPI_LOGFILE, OVPN_PIDFILE));
+	}
+	
+	public function SetNetworkSettings($addr,$mask,$gateway)
+	{
+		if(!filter_var($addr, FILTER_VALIDATE_IP) || !filter_var($mask, FILTER_VALIDATE_IP) || !!filter_var($gateway, FILTER_VALIDATE_IP))
+		{
+			return false;
+		}
+		if(!@file_put_contents(DATAPATH.'networking_addr.dat',$addr)) return false;
+		if(!@file_put_contents(DATAPATH.'networking_mask.dat',$mask)) return false;
+		if(!@file_put_contents(DATAPATH.'networking_gateway.dat',$gateway)) return false;
+		
+		exec('sudo /sbin/ifconfig eth0 '.$addr.' netmask '.$mask,$cmd_output,$return_var);
+		exec('sudo /sbin/route add default gw '.$gateway,$cmd_output2,$return_var2);
+		
+		if($return_var==0 && $return_var2==0)
+		{
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public function GetNetworkSettings()
+	{
+		$addr=file_get_contents(DATAPATH.'networking_addr.dat');
+		$mask=file_get_contents(DATAPATH.'networking_mask.dat');
+		$gateway=file_get_contents(DATAPATH.'networking_gateway.dat');
+		
+		$buffer=array('addr' => $addr,'mask' => $mask,'gateway' => $gateway);
+		return $buffer;
 	}
 }
 ?>
