@@ -4,6 +4,16 @@
 
 CryptoPi (CryPi) is a web based application written in PHP that helps you to manage OpenVPN connections to secure your internet connection.
 
-You're able to import OpenVPN connection packets which are stored in truecrypt containers (v 7.1a, or course). With one click, the VPN tunnel is going up and the system starts acting as a NAT router. Configure your devices to use the CryPi system as default gateway and it will forward all your internet traffic trough the VPN tunnel.
+Using the web based frontent, you can create secure encrypted containers which are stored on the CryPi. Then, upload your OpenVPN config files to this container and tell CryPi your VPN login credentials (stored secure in the container). After that, CryPi will create the VPN tunnel using OpenVPN for you and will start acting as a NAT router. Simply configure all the devices in your network to use CryPi as their default gateway - that's all.
 
-This system is meant to secure your internet connection from spying. It's designed to be run on a raspberry pi using Raspbian OS.
+Due to safety reasons, it's not possible to safe a container's password on the device - therefore, you have to unlock the config container every time CryPi boots by entering it's password.
+
+Create as many containers as you with. Open one of them and go online using an encrypted VPN tunnel.
+
+Currently, CryPi is only tested with the VPN provider "Perfect Privacy" (which seems to be the best when it comes to anonymity and privacy), but should work fine with other providers, too.
+
+If there's a provider that doesn't work with CryPi, just create a testing account and send the credentials to us - we will try to get it work.
+
+Thank you for using this software.
+
+CryptoPi - Anonymity, Privacy, Security.
