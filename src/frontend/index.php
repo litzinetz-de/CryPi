@@ -27,7 +27,7 @@ if($_GET['do']=='system')
 		$buffer=$c->GetNetworkSettings();
 		if($_POST['networking_addr']!=$buffer['addr'] || $POST['networking_mask']!=$buffer['mask'] || $_POST['networking_gateway']!=$buffer['gateway'])
 		{
-			if($c->SetNetworkSettings($_POST['addr'],$_POST['mask'],$_POST['gateway']))
+			if($c->SetNetworkSettings($_POST['networking_addr'],$_POST['networking_mask'],$_POST['networking_gateway']))
 			{
 				$g->SysMSG('Network settings applied.');
 			} else {

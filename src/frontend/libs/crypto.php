@@ -198,12 +198,12 @@ class crypto
 		
 		if($return_var==0 && $return_var2==0)
 		{
-			echo 'OK';
+			//echo 'OK';
 			return true;
 		} else {
-			print_r($cmd_output);
-			print_r($cmd_output2);
-			echo 'ERROR';
+			//print_r($cmd_output);
+			//print_r($cmd_output2);
+			//echo 'ERROR';
 			return false;
 		}
 	}
