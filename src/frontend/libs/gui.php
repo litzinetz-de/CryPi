@@ -49,7 +49,7 @@ class GUI
 		<br>
 		<li><a href="?do=connection">VPN management</a></li>
 		<br>
-		<li><a href="?do=system">System settings</li>
+		<li><a href="?do=system">System settings</a></li>
 		<br>
 		<li><a href="?do=logout">Logout</a>';
 	}
