@@ -184,7 +184,7 @@ class crypto
 	
 	public function SetNetworkSettings($addr,$mask,$gateway)
 	{
-		if(!filter_var($addr, FILTER_VALIDATE_IP) || !filter_var($mask, FILTER_VALIDATE_IP) || !!filter_var($gateway, FILTER_VALIDATE_IP))
+		if(!filter_var($addr, FILTER_VALIDATE_IP) || !filter_var($mask, FILTER_VALIDATE_IP) || !filter_var($gateway, FILTER_VALIDATE_IP))
 		{
 			echo 'NOVAL-'.$addr.'-'.$mask.'-'.$gateway;
 			return false;
