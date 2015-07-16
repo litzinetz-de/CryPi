@@ -25,7 +25,7 @@ if($_GET['do']=='system')
 		$g->SystemSettingsForm($buffer['addr'],$buffer['mask'],$buffer['gateway']);
 	} else {
 		$buffer=$c->GetNetworkSettings();
-		if($_POST['networking_addr']!=$buffer['addr'] || $POST['networking_mask']!=$buffer['mask'] || $_POST['networking_gateway']!=$buffer['gateway'])
+		if($_POST['networking_addr']!=$buffer['addr'] || $_POST['networking_mask']!=$buffer['mask'] || $_POST['networking_gateway']!=$buffer['gateway'])
 		{
 			if($c->SetNetworkSettings($_POST['networking_addr'],$_POST['networking_mask'],$_POST['networking_gateway']))
 			{
