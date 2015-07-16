@@ -33,7 +33,7 @@ class GUI
 		</tr>
 		</table>
 		<br><br><table width="100%" border="0"><tr>
-		<td width="20%">';
+		<td width="20%" valign="top">';
 	}
 	
 	public function GlobalFooter()
@@ -45,25 +45,13 @@ class GUI
 	
 	public function GlobalNavigation()
 	{
-		echo '<li><a href="?do=configs">Config container management</a></li>
+		echo '<li><a href="?do=containers">Config container management</a></li>
 		<br>
-		<li><a href="?do=connection">VPN management</a></li>
+		<li><a href="?do=vpn">VPN management</a></li>
 		<br>
 		<li><a href="?do=system">System settings</a></li>
 		<br>
 		<li><a href="?do=logout">Logout</a>';
-	}
-	
-	public function SystemSettingsForm($addr,$mask,$gateway)
-	{
-		echo '<form action="?do=system&write=y" method="post"><table border="0">
-		<tr class="tableheader"><td colspan="2"><b>Network settings</b></td></tr>
-		<tr><td>IP address:</td><td><input type="text" name="networking_addr" size="20" class="formstyle" value="'.$addr.'"></td></tr>
-		<tr><td>Netmask:</td><td><input type="text" name="networking_mask" size="20" class="formstyle" value="'.$mask.'"></td></tr>
-		<tr><td>Gateway:</td><td><input type="text" name="networking_gateway" size="20" class="formstyle" value="'.$gateway.'"></td></tr>
-		</table>
-		<br><br>
-		<input type="submit" value="Apply" class="formstyle"></form>';
 	}
 	
 	public function SysMSG($msg)
