@@ -186,7 +186,7 @@ class crypto
 	{
 		if(!filter_var($addr, FILTER_VALIDATE_IP) || !filter_var($mask, FILTER_VALIDATE_IP) || !filter_var($gateway, FILTER_VALIDATE_IP))
 		{
-			//echo 'NOVAL-'.$addr.'-'.$mask.'-'.$gateway;
+			echo 'NOVAL-'.$addr.'-'.$mask.'-'.$gateway;
 			return false;
 		}
 		if(!@file_put_contents(DATAPATH.'networking_addr.dat',$addr)) return false;
@@ -198,12 +198,12 @@ class crypto
 		
 		if($return_var==0 && $return_var2==0)
 		{
-			return true;
 			echo 'OK';
+			return true;
 		} else {
-			//print_r($cmd_output);
-			//print_r($cmd_output2);
-			//echo 'ERROR';
+			print_r($cmd_output);
+			print_r($cmd_output2);
+			echo 'ERROR';
 			return false;
 		}
 	}
