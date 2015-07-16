@@ -68,7 +68,7 @@ class GUI
 	
 	public function SysMSG($msg)
 	{
-		  echo '<center><b>'.$msg.'</center></b>';
+		  echo '<center><b>'.$msg.'</b></center>';
 	}
 }
 
