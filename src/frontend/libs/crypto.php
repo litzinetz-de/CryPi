@@ -186,7 +186,7 @@ class crypto
 	{
 		if(!filter_var($addr, FILTER_VALIDATE_IP) || !filter_var($mask, FILTER_VALIDATE_IP) || !!filter_var($gateway, FILTER_VALIDATE_IP))
 		{
-			echo 'NOVAL';
+			echo 'NOVAL-'.$addr.'-'.$mask.'-'.$gateway;
 			return false;
 		}
 		if(!@file_put_contents(DATAPATH.'networking_addr.dat',$addr)) return false;
