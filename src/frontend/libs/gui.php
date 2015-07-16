@@ -38,7 +38,7 @@ class GUI
 	
 	public function GlobalFooter()
 	{
-		echo '</td></tr></table><br><center><i>CryPi V '.$this->version.'</i></center>
+		echo '</td></tr></table><br><div id="footer">CryPi V '.$this->version.'</div>
 		</body>
 		</html>';
 	}

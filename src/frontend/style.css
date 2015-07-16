@@ -66,3 +66,9 @@ td.smalltd
 {
 	font: 10px Arial,Helvetica,sans-serif;
 }
+#footer {
+    clear:left;
+    background:#efefef;
+    text-align:center;
+    padding:10px;
+}
