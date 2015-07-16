@@ -199,7 +199,8 @@ class crypto
 		{
 			return true;
 		} else {
-			echo '!!!'.$addr.' - '.$mask.' '.$gateway;
+			print_r($cmd_output);
+			print_r($cmd_output2);
 			return false;
 		}
 	}
