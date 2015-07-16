@@ -22,7 +22,18 @@ if($_GET['do']=='system')
 	if($_GET['write']!='y')
 	{
 		$buffer=$c->GetNetworkSettings();
-		$g->SystemSettingsPage($buffer['addr'],$buffer['mask'],$buffer['gateway']);
+		$g->SystemSettingsForm($buffer['addr'],$buffer['mask'],$buffer['gateway']);
+	} else {
+		$buffer=$c->GetNetworkSettings();
+		if($_POST['addr']!=$buffer['addr'] || $POST['maks']!=$buffer['mask'] || $_POST['gateway']!=$buffer['gateway'])
+		{
+			if(@$c->SetNetworkSettings($_POST['addr'],$_POST['mask'],$_POST['gateway']))
+			{
+				$g->SysMSG('Network settings applied.');
+			} else {
+				$g->SysMSG('Error! Please check the entered addresses.');
+			}
+		}
 	}
 }
 

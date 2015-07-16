@@ -54,7 +54,7 @@ class GUI
 		<li><a href="?do=logout">Logout</a>';
 	}
 	
-	public function SystemSettingsPage($addr,$mask,$gateway)
+	public function SystemSettingsForm($addr,$mask,$gateway)
 	{
 		echo '<form action="?do=system&write=y" method="post"><table border="0">
 		<tr class="tableheader"><td colspan="2"><b>Network settings</b></td></tr>
@@ -64,6 +64,11 @@ class GUI
 		</table>
 		<br><br>
 		<input type="submit" value="Apply" class="formstyle"></form>';
+	}
+	
+	public function SysMSG($msg)
+	{
+		  echo '<center><b>'.$msg.'</center></b>';
 	}
 }
 
