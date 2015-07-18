@@ -66,7 +66,7 @@ if($_GET['do']=='containers')
 	}
 	echo '</select><br>Container password: <input type="password" name="mnt_password" id="mnt_password" class="formstyle"> <input type="submit" value="Mount" class="formstyle"></form><br><hr size="2"><br>
 	<form name="create_container" action="?do=create_container" method="post">Create container: <input type="text" size="20" name="c_name" class="formstyle" id="c_name"> with password: <input type="password" name="c_password" id="c_password" size="20" class="formstyle"> confirm: <input type="password" name="c_confirm" id="c_confirm" size="20" class="formstyle"> 
-	<input type="submit" value="Create" name="c_submitbutton" id="c_submitbutton" class="formstyle" onclick="SubmitCreateContainer();"></form>';
+	<input type="submit" value="Create" name="c_submitbutton" id="c_submitbutton" class="formstyle"> (Currently mounted containers will be dismounted and connected VPN tunnels will be dropped!)</form>';
 }
 
 if($_GET['do']=='create_container')
@@ -97,7 +97,17 @@ if($_GET['do']=='mount')
 	{
 		echo 'Container mounted.';
 	} else {
-		echo 'Coudn\'t mount container!';
+		echo 'Coudn\'t mount container. Please make sure you use the right password! Forgotten passwords are lost forever.';
+	}
+}
+
+if($_GET['do']=='dismount')
+{
+	if($c->dismount_container())
+	{
+		echo 'Container dismounted.';
+	} else {
+		echo 'Couldn\'t dismount container. Is it even mounted?';
 	}
 }
 

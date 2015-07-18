@@ -60,6 +60,9 @@ class crypto
 	
 	public function mount_container($pwd,$cont_name)
 	{
+		if($this->VPNConnected()) $this->KillVPN();
+		if($this->container_mounted()) $this->dismount_container();
+		
 		$cont_path=VPN_CONF_ENC.$this->cleanup_filename($cont_name);
 		$runcmd='sudo '.TC_BIN.' --non-interactive '.$cont_path.' '.VPN_CONF_MNT.' -p "'.$pwd.'"';
 		
@@ -70,9 +73,9 @@ class crypto
 			return true;
 		} else {
 			// Handle error
-			echo 'debug information:<br><pre>';
+			/*echo 'debug information:<br><pre>';
 			print_r($cmd_output);
-			echo '</pre>';
+			echo '</pre>';*/
 			return false;
 		}
 	}
