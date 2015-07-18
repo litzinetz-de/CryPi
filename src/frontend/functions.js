@@ -1,5 +1,6 @@
 function SubmitCreateContainer()
 {
+	alert('.');
 	submit_ok=true;
 	if(document.create_container.c_name.value=='')
 	{
