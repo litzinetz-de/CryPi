@@ -64,7 +64,31 @@ if($_GET['do']=='containers')
 	{
 		echo '<option value="'.$cur_container.'">'.$cur_container.'</option>';
 	}
-	echo '<input type="submit" value="Mount" class="formstyle"></form>';
+	echo '<br><input type="submit" value="Mount" class="formstyle"></form><br><br>
+	<form action="?do=create_container" method="post">Create container: <input type="text" size="20" name="c_name" class="formstyle"> with password: <input type="password" name="c_password" size="20" class="formstyle"> confirm: <input type="password" name="c_confirm" size="20" class="formstyle"> 
+	<input type="submit" value="Create" class="formstyle"></form>';
+}
+
+if($_GET['do']=='create_container')
+{
+	if(trim($_POST['c_name'])=='')
+	{
+		die('Error: no container name given.');
+	}
+	if(trim($_POST['c_password'])=='')
+	{
+		die('Error: no password given.');
+	}
+	if($_POST['c_password']!=$_POST['c_confirm'])
+	{
+		die('Error: the passwords do not match.');
+	}
+	if($c->create_container($_POST['c_password'],$_POST['c_name']))
+	{
+		echo 'The container has been created. You may mount it now.';
+	} else {
+		echo 'Couldn\'t create container :(';
+	}
 }
 
 $g->GlobalFooter();

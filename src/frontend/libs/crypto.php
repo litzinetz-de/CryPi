@@ -11,7 +11,11 @@ class crypto
 	
 	private function cleanup_filename($filename)
 	{
-		return preg_replace("/[^a-z0-9\.]/", "", strtolower($filename));
+		$filename=preg_replace("/[^a-z0-9\.]/", "", strtolower($filename));
+		$d1 = array("ä" , "ö", "ü", "ß", "Ä", "Ö", "Ü");
+		$d2 = array("ae" , "oe", "ue", "ss", "Ae", "Oe", "Ue");
+		$filename=str_replace($d1, $d2, $string);
+		return $filename;
 	}
 	
 	public function ReadContainers()
