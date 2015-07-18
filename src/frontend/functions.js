@@ -1,7 +1,7 @@
 function SubmitCreateContainer()
 {
 	alert('...');
-	submit_ok=true;
+	var submit_ok=true;
 	if(document.getElementByID('c_name').value=='')
 	{
 	  document.getElementByID('c_name').backgroundColor='red';
