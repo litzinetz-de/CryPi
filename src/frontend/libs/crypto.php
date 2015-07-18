@@ -70,6 +70,9 @@ class crypto
 			return true;
 		} else {
 			// Handle error
+			echo 'debug information:<br><pre>';
+			print_r($cmd_output);
+			echo '</pre>';
 			return false;
 		}
 	}
