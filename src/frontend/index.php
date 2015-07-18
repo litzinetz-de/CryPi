@@ -58,7 +58,7 @@ if($_GET['do']=='containers')
 		echo 'There is no container mounted. Choose a container below or create a new one.';
 	}
 	
-	echo '</b></center><br><br><form action="?" method="get"><input type="hidden" name="do" value="mount">
+	echo '</b></center><br><br><form action="?do=mount" method="post">
 	<select name="mnt_container" size="5" class="formstyle">';
 	foreach($containerlist as $cur_container)
 	{
