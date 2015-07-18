@@ -59,12 +59,12 @@ if($_GET['do']=='containers')
 	}
 	
 	echo '</b></center><br><br><form action="?" method="get"><input type="hidden" name="do" value="mount">
-	<select name="container" size="5" class="formstyle">';
+	<select name="mnt_container" size="5" class="formstyle">';
 	foreach($containerlist as $cur_container)
 	{
 		echo '<option value="'.$cur_container.'">'.$cur_container.'</option>';
 	}
-	echo '</select>Container password: <input type="password" name="mnt_password" id="mnt_password" class="formstyle"> <input type="submit" value="Mount" class="formstyle"></form><br><hr size="2">
+	echo '</select><br>Container password: <input type="password" name="mnt_password" id="mnt_password" class="formstyle"> <input type="submit" value="Mount" class="formstyle"></form><br><hr size="2"><br>
 	<form name="create_container" action="?do=create_container" method="post">Create container: <input type="text" size="20" name="c_name" class="formstyle" id="c_name"> with password: <input type="password" name="c_password" id="c_password" size="20" class="formstyle"> confirm: <input type="password" name="c_confirm" id="c_confirm" size="20" class="formstyle"> 
 	<input type="submit" value="Create" name="c_submitbutton" id="c_submitbutton" class="formstyle" onclick="SubmitCreateContainer();"></form>';
 }
@@ -93,7 +93,12 @@ if($_GET['do']=='create_container')
 
 if($_GET['do']=='mount')
 {
-
+	if($c->mount_container($_POST['mnt_password'],$_POST['mnt_container']))
+	{
+		echo 'Container mounted.';
+	} else {
+		echo 'Coudn\'t mount container!';
+	}
 }
 
 $g->GlobalFooter();
