@@ -65,8 +65,8 @@ if($_GET['do']=='containers')
 		echo '<option value="'.$cur_container.'">'.$cur_container.'</option>';
 	}
 	echo '<br><input type="submit" value="Mount" class="formstyle"></form><br><br>
-	<form action="?do=create_container" method="post">Create container: <input type="text" size="20" name="c_name" class="formstyle"> with password: <input type="password" name="c_password" size="20" class="formstyle"> confirm: <input type="password" name="c_confirm" size="20" class="formstyle"> 
-	<input type="submit" value="Create" class="formstyle"></form>';
+	<form name="create_container" action="?do=create_container" method="post">Create container: <input type="text" size="20" name="c_name" class="formstyle"> with password: <input type="password" name="c_password" size="20" class="formstyle"> confirm: <input type="password" name="c_confirm" size="20" class="formstyle"> 
+	<input type="button" value="Create" name="submitbutton" class="formstyle" onclick="SubmitCreateContainer();"></form>';
 }
 
 if($_GET['do']=='create_container')
