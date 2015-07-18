@@ -64,7 +64,7 @@ if($_GET['do']=='containers')
 	{
 		echo '<option value="'.$cur_container.'">'.$cur_container.'</option>';
 	}
-	echo '<br><input type="submit" value="Mount" class="formstyle"></form><br><br>
+	echo '</select>Container password: <input type="password" name="mnt_password" id="mnt_password" class="formstyle"> <input type="submit" value="Mount" class="formstyle"></form><br><hr size="2">
 	<form name="create_container" action="?do=create_container" method="post">Create container: <input type="text" size="20" name="c_name" class="formstyle" id="c_name"> with password: <input type="password" name="c_password" id="c_password" size="20" class="formstyle"> confirm: <input type="password" name="c_confirm" id="c_confirm" size="20" class="formstyle"> 
 	<input type="submit" value="Create" name="c_submitbutton" id="c_submitbutton" class="formstyle" onclick="SubmitCreateContainer();"></form>';
 }
@@ -89,6 +89,11 @@ if($_GET['do']=='create_container')
 	} else {
 		echo 'Couldn\'t create container :(';
 	}
+}
+
+if($_GET['do']=='mount')
+{
+
 }
 
 $g->GlobalFooter();
