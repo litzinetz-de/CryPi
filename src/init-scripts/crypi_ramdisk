@@ -10,7 +10,9 @@
  
 start() {
   mount -t tmpfs -o size=15M none /crypi/upload_tmp
-  mount -t tmpfs -o size=50M none /crypi/upload_workdir/
+  mount -t tmpfs -o size=50M none /crypi/upload_workdir
+  chown www-data:www-data /crypi/upload_tmp
+  chown www-data:www-data /crypi/upload_workdir
 }
  
 stop() {
