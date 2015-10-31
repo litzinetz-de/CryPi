@@ -197,7 +197,7 @@ class crypto
 				{
 					if(preg_match('/.*auth-user-pass.*/i',$line) && !preg_match('/.*'.VPN_CONF_MNT.'cred.dat.*/i',$line))
 					{
-						$line="auth-user-pass ".VPN_CONF_MNT."cred.dat";
+						$line="auth-user-pass ".VPN_CONF_MNT."cred.dat\n";
 						$write_new_file=true;
 					}
 					array_push($linebuffer,$line);
