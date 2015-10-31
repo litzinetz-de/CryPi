@@ -249,6 +249,7 @@ class crypto
 		if(!$res = $zip->open($vpn_filepath)) return false;
 		$zip->extractTo(VPN_CONF_MNT);
 		$zip->close();
+		return true;
 	}
 }
 ?>
