@@ -122,7 +122,7 @@ class crypto
 		{
 			if($file!='.' && $file!='..')
 			{
-				$fullpath=$dir.'/'.$file;
+				$fullpath=$dir.$file;
 				if(is_dir($fullpath))
 				{
 					$configlist=array_merge($configlist,$this->ReadConfigs($fullpath));
@@ -145,6 +145,11 @@ class crypto
 		}
 		
 		return $this->ReadConfigs(VPN_CONF_MNT);
+	}
+	
+	public function RemoveMntPath($path)
+	{
+		return str_replace(VPN_CONF_MNT,'',$path);
 	}
 	
 	public function AddCredentials($username,$password)

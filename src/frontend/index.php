@@ -153,6 +153,7 @@ if($_GET['do']=='vpn')
 		echo '<form action="?do=vpn_connect" method="post">Select a VPN config from the list below and click &quot;Connect&quot;.<br><select name="vpn_config" size="10">';
 		foreach($configlist as $config)
 		{
+			$config=$c->RemoveMntPath($config);
 			echo '<option value="'.$config.'">'.$config.'</option>';
 		}
 		echo '</select><br><input type="submit" value="Connect"></form>';
