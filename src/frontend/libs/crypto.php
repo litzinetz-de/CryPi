@@ -122,7 +122,7 @@ class crypto
 		{
 			if($file!='.' && $file!='..')
 			{
-				$fullpath=$dir.$file;
+				$fullpath=$dir.'/'.$file;
 				if(is_dir($fullpath))
 				{
 					$configlist=array_merge($configlist,$this->ReadConfigs($fullpath));
