@@ -156,7 +156,7 @@ if($_GET['do']=='vpn')
 			$config=$c->RemoveMntPath($config);
 			echo '<option value="'.$config.'">'.$config.'</option>';
 		}
-		echo '</select><br><input type="submit" value="Connect"></form></td>
+		echo '</select><br><input type="submit" value="Connect"></form></td><td width="200px">&nbsp;</td>
 		<td valign="top">VPN: ';
 		
 		if($c->VPNConnected())
@@ -165,7 +165,9 @@ if($_GET['do']=='vpn')
 		} else {
 			echo '<font color="red">Disconnected</font>';
 		}
-		echo '<br><br>WAN-Route:<br><pre>'.$c->ShowWANRoute().'</pre>';
+		echo '<br><br>WAN-Route:<br><pre>';
+		print_r($c->ShowWANRoute());
+		echo '</pre>';
 		
 		echo '</td>
 		</tr></table>';
