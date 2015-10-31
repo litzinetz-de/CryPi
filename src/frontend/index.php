@@ -162,6 +162,16 @@ if($_GET['do']=='vpn')
 	<input type="submit" value="Upload container"></form>';
 }
 
+if($_GET['do']=='vpn_upload')
+{
+	if($c->HandleVPNUpload())
+	{
+		$g->SysMSG('Upload successful.');
+	} else {
+		$g->SysMSG('Upload failed! Is is a ZIP file? File corrupted? Too large?');
+	}
+}
+
 $g->GlobalFooter();
 
 ?>

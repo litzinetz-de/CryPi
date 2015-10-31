@@ -206,7 +206,7 @@ class crypto
 	{
 		if(!filter_var($addr, FILTER_VALIDATE_IP) || !filter_var($mask, FILTER_VALIDATE_IP) || !filter_var($gateway, FILTER_VALIDATE_IP))
 		{
-			echo 'NOVAL-'.$addr.'-'.$mask.'-'.$gateway;
+			//echo 'NOVAL-'.$addr.'-'.$mask.'-'.$gateway;
 			return false;
 		}
 		if(!@file_put_contents(DATAPATH.'networking_addr.dat',$addr)) return false;
@@ -236,6 +236,24 @@ class crypto
 		
 		$buffer=array('addr' => $addr,'mask' => $mask,'gateway' => $gateway);
 		return $buffer;
+	}
+	
+	public function HandleVPNUpload()
+	{
+		$vpn_filepath=UPLOAD_WORKDIR.$_FILES['vpn_file']['name'];
+		if(!move_uploaded_file($_FILES['vpn_file']['tmp_name'], $vpn_filepath))
+		{
+			return false;
+		}
+		$zip = new ZipArchive;
+		$res = $zip->open($vpn_filepath);
+		if ($res === TRUE)
+		{
+		    $zip->extractTo(VPN_CONF_MNT);
+		    $zip->close();
+		} else {
+		    return false;
+		}
 	}
 }
 ?>

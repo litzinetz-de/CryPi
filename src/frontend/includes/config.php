@@ -15,4 +15,5 @@ define('VPN_CONF_ENC',VPN_CONF_BASEDIR.'enc/');
 define('VPN_CONF_MNT',VPN_CONF_BASEDIR.'mnt/');
 define('BACKENDPATH',VPN_CONF_BASEDIR.'backend/');
 define('DATAPATH',VPN_CONF_BASEDIR.'data/');
+define('UPLOAD_WORKDIR',VPN_CONF_BASEDIR.'upload_workdir/');
 ?>
