@@ -232,6 +232,12 @@ class crypto
 		}
 	}
 	
+	public function ShowWANRoute()
+	{
+		exec('traceroute -m 2 8.8.8.8',$cmd_output,$return_var);
+		return $cmd_output;
+	}
+	
 	public function KillVPN()
 	{
 		exec('sudo '.PKILL_BIN.' openvpn');

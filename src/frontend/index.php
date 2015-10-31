@@ -150,13 +150,25 @@ if($_GET['do']=='vpn')
 	
 	if(!$cl_empty)
 	{
-		echo '<form action="?do=vpn_connect" method="post">Select a VPN config from the list below and click &quot;Connect&quot;.<br><select name="vpn_config" size="10">';
+		echo '<table border="0" cellspacing="1"><tr><td valign="top"><form action="?do=vpn_connect" method="post">Select a VPN config from the list below and click &quot;Connect&quot;.<br><select name="vpn_config" size="10">';
 		foreach($configlist as $config)
 		{
 			$config=$c->RemoveMntPath($config);
 			echo '<option value="'.$config.'">'.$config.'</option>';
 		}
-		echo '</select><br><input type="submit" value="Connect"></form>';
+		echo '</select><br><input type="submit" value="Connect"></form></td>
+		<td valign="top">VPN: ';
+		
+		if($c->VPNConnected())
+		{
+			echo '<font color="green">Connected</font>';
+		} else {
+			echo '<font color="red">Disconnected</font>';
+		}
+		echo '<br><br>WAN-Route:<br><pre>'.$c->ShowWANRoute().'</pre>';
+		
+		echo '</td>
+		</tr></table>';
 	}
 	echo '<br><br>Upload container (ZIP file, max. 12 MB): <form enctype="multipart/form-data" action="?do=vpn_upload" method="post"><input name="vpn_file" type="file">
 	<input type="submit" value="Upload container"></form><br><br>
