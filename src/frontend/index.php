@@ -165,11 +165,8 @@ if($_GET['do']=='vpn')
 		} else {
 			echo '<font color="red">Disconnected</font>';
 		}
-		echo '<br><br>WAN-Route:<br><pre>';
-		print_r($c->ShowWANRoute());
-		echo '</pre>';
-		
-		echo '</td>
+		$routeinfo=$c->ShowWANRoute();
+		echo '<br><br>WAN routing via:<br>'.$routeinfo[1].'<br>'.$routeinfo[2].'</td>
 		</tr></table>';
 	}
 	echo '<br><br>Upload container (ZIP file, max. 12 MB): <form enctype="multipart/form-data" action="?do=vpn_upload" method="post"><input name="vpn_file" type="file">
