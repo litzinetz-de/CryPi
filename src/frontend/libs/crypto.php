@@ -149,7 +149,7 @@ class crypto
 	
 	public function RemoveMntPath($path)
 	{
-		return str_replace(VPN_CONF_MNT,'',$path);
+		return ltrim(str_replace(VPN_CONF_MNT,'',$path), '/');
 	}
 	
 	public function AddCredentials($username,$password)
