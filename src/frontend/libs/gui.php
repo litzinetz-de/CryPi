@@ -39,7 +39,7 @@ class GUI
 	
 	public function GlobalFooter()
 	{
-		echo '</td></tr></table><br><div id="footer">CryPi V '.$this->version.'</div>
+		echo '</td></tr></table><br><div id="footer"><h3>CryptoPi - Anonymity, Privacy, Security.</h3><br><small>CryPi V '.$this->version.'</small></div>
 		</body>
 		</html>';
 	}
