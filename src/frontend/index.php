@@ -118,6 +118,7 @@ if($_GET['do']=='vpn')
 		$g->SysMSG('Please mount or create a container first');
 		die();
 	}
+	$configlist=$c->FindConfigs();
 	if(empty($configlist))
 	{
 		$cl_empty=true;
@@ -145,6 +146,16 @@ if($_GET['do']=='vpn')
 		}
 		echo $msg;
 		$g->SysMSG('<br>Please complete the steps mentioned above and we will try it again.');
+	}
+	
+	if(!$cl_empty)
+	{
+		echo '<form action="?do=vpn_connect" method="post">Select a VPN config from the list below and click &quot;Connect&quot;.<br><select name="vpn_config" size="10">';
+		foreach($configlist as $config)
+		{
+			echo '<option value="'.$config.'">'.$config.'</option>';
+		}
+		echo '</select><br><input type="submit" value="Connect"></form>';
 	}
 	
 }
