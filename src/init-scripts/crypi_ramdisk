@@ -9,11 +9,13 @@
 ### END INIT INFO
  
 start() {
-  mount -t tmpfs -o size=25M none /crypi/upload_tmp
+  mount -t tmpfs -o size=15M none /crypi/upload_tmp
+  mount -t tmpfs -o size=50M none /crypi/upload_workdir/
 }
  
 stop() {
   umount /crypi/upload_tmp
+  umount /crypi/upload_workdir/
 }
  
 case "$1" in
