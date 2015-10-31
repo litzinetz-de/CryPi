@@ -168,6 +168,11 @@ class crypto
 		}
 	}
 	
+	public function CredentialsAvailable()
+	{
+		return file_exists(VPN_CONF_MNT.'cred.dat');
+	}
+	
 	public function VPNConnected()
 	{
 		exec('ip link show dev tun0 2> /dev/null',$cmd_output,$return_var);

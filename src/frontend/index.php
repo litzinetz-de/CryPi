@@ -111,6 +111,19 @@ if($_GET['do']=='dismount')
 	}
 }
 
+if($_GET['do']=='vpn')
+{
+	if(!$c->container_mounted())
+	{
+		$g->SysMSG('Please mount or create a container first');
+		die();
+	}
+	if(!$c->CredentialsAvailable)
+	{
+		$g->SysMSG('We don\'t know any VPN credentials for this container. Please add them by clicking &quot;Set Credentials&quot;');
+	}
+}
+
 $g->GlobalFooter();
 
 ?>
