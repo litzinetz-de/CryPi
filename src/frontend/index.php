@@ -159,7 +159,20 @@ if($_GET['do']=='vpn')
 		echo '</select><br><input type="submit" value="Connect"></form>';
 	}
 	echo '<br><br>Upload container (ZIP file, max. 12 MB): <form enctype="multipart/form-data" action="?do=vpn_upload" method="post"><input name="vpn_file" type="file">
-	<input type="submit" value="Upload container"></form>';
+	<input type="submit" value="Upload container"></form><br><br>
+	<form action="?do=set_credentials" method="post">Set VPN login credentials:<br>Username: <input type="text" name="username" size="20"> Password: <input type="password" size="20" name="password"> <input type="submit" value="Save"></form><br>
+	<small>This will overwrite given credentials (<font color="red">please don\'t use spaces here!</font>). I will also modify the VPN config files if needed. It might take a moment, please wait until I have finished with that!</small>';
+}
+
+if($_GET['do']=='set_credentials')
+{
+	if(!$c->container_mounted())
+	{
+		$g->SysMSG('Please mount a container first.');
+		die();
+	}
+	$c->AddCredentials(trim($_POST['username']),trim($_POST['password']));
+	echo 'Credentials set.';
 }
 
 if($_GET['do']=='vpn_upload')
@@ -180,6 +193,7 @@ if($_GET['do']=='vpn_connect')
 		die();
 	}
 	$c->StartVPN($_POST['vpn_config']);
+	echo 'Building tunnel, should be up in a few seconds.';
 }
 
 $g->GlobalFooter();

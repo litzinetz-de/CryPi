@@ -157,6 +157,16 @@ class crypto
 		return ltrim(str_replace(VPN_CONF_MNT,'',$path), '/');
 	}
 	
+	private function AuthUserPassInConfFile($filepath)
+	{
+		if( exec('grep auth-user-pass '.$filepath))
+		{
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public function AddCredentials($username,$password)
 	{
 		if(!$this->container_mounted())
@@ -172,9 +182,12 @@ class crypto
 		
 		foreach($ovpn_list as $ovpn)
 		{
-			$fh=fopen($ovpn,'a');
-			fwrite($fh,"auth-user-pass ".VPN_CONF_MNT."cred.dat");
-			fclose($fh);
+			if(!$this->AuthUserPassInConfFile($ovpn))
+			{
+				$fh=fopen($ovpn,'a');
+				fwrite($fh,"auth-user-pass ".VPN_CONF_MNT."cred.dat");
+				fclose($fh);
+			}
 		}
 	}
 	
