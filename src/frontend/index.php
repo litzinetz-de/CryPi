@@ -118,10 +118,39 @@ if($_GET['do']=='vpn')
 		$g->SysMSG('Please mount or create a container first');
 		die();
 	}
-	if(!$c->CredentialsAvailable)
+	if(!$configlist=$c->FindConfigs())
 	{
-		$g->SysMSG('We don\'t know any VPN credentials for this container. Please add them by clicking &quot;Set Credentials&quot;');
+		$g->SysMSG('Please mount or create a container first');
+		die();
 	}
+	if(empty($configlist))
+	{
+		$cl_empty=true;
+	} else {
+		$cl_empty=false;
+	}
+	
+	if($c->CedentialsAvailable())
+	{
+		$cred_avail=true;
+	} else {
+		$cred_avail=false;
+	}
+	
+	if($cl_empty || !$cred_avail)
+	{
+		$msg='Before we can connect to a VPN, there are still some steps to complete:<br><br>';
+		if($cl_empty)
+		{
+			$msg=$msg.'<li>I don\'t see any vpn configs in this container yet. Please upload your VPN config bundle that you have got from your VPN provider below. It must be an OpenVPN package. I will sort it and find the config files, which must end with &quot;.ovpn&quot;.</li>';
+		}
+		if(!$cred_avail)
+		{
+			$msg=$msg.'<li>You have not provided the login credentials for your VPN provider. I need them to setup a VPN connection. No worries, I will store them inside the encrypted container.</li>';
+		}
+		echo '<br>Please complete the steps mentioned above and we will try it again.';
+	}
+	
 }
 
 $g->GlobalFooter();
