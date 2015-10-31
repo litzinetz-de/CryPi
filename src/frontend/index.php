@@ -161,7 +161,7 @@ if($_GET['do']=='vpn')
 		
 		if($c->VPNConnected())
 		{
-			echo '<font color="green">Connected</font>';
+			echo '<font color="green">Connected</font> [<a href="?do=vpn_disconnect">Disconnect</a>]';
 		} else {
 			echo '<font color="red">Disconnected</font>';
 		}
@@ -205,6 +205,12 @@ if($_GET['do']=='vpn_connect')
 	}
 	$c->StartVPN($_POST['vpn_config']);
 	echo 'Building tunnel, should be up in a few seconds.';
+}
+
+if($_GET['do']=='vpn_disconnect')
+{
+	$c->KillVPN();
+	$g->SysMSG('I have killed the tunnel.');
 }
 
 $g->GlobalFooter();
