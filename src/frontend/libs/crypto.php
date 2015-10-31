@@ -246,14 +246,9 @@ class crypto
 			return false;
 		}
 		$zip = new ZipArchive;
-		$res = $zip->open($vpn_filepath);
-		if ($res === TRUE)
-		{
-		    $zip->extractTo(VPN_CONF_MNT);
-		    $zip->close();
-		} else {
-		    return false;
-		}
+		if(!$res = $zip->open($vpn_filepath)) return false;
+		$zip->extractTo(VPN_CONF_MNT);
+		$zip->close();
 	}
 }
 ?>

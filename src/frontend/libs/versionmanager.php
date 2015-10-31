@@ -1,7 +1,7 @@
 <?php
 class version
 {
-	private $curver='indev-014';
+	private $curver='indev-015';
 	
 	function __construct()
 	{
