@@ -158,7 +158,8 @@ if($_GET['do']=='vpn')
 		}
 		echo '</select><br><input type="submit" value="Connect"></form>';
 	}
-	
+	echo '<br><br>Upload container (ZIP file, max. 20 MB): <form enctype="multipart/form-data" action="?do=vpn_upload" method="post"><input type="hidden" name="MAX_FILE_SIZE" value="30000"><input name="vpn_file" type="file">
+	<input type="submit" value="Upload container"></form>';
 }
 
 $g->GlobalFooter();
