@@ -182,12 +182,37 @@ class crypto
 		
 		foreach($ovpn_list as $ovpn)
 		{
-			if(!$this->AuthUserPassInConfFile($ovpn))
+			/*if(!$this->AuthUserPassInConfFile($ovpn))
 			{
 				$fh=fopen($ovpn,'a');
 				fwrite($fh,"auth-user-pass ".VPN_CONF_MNT."cred.dat");
 				fclose($fh);
-			}
+			}*/
+			$linebuffer=array();
+			$write_new_file=false;
+			$handle = fopen($ovpn, "r");
+			if ($handle)
+			{
+				while (($line = fgets($handle)) !== false)
+				{
+					if(preg_match('/.*auth-user-pass.*/i',$line) && !preg_match('/.*'.VPN_CONF_MNT.'cred.dat.*/i',$line))
+					{
+						$line="auth-user-pass ".VPN_CONF_MNT."cred.dat";
+						$write_new_file=true;
+					}
+					array_push($linebuffer,$line);
+				}
+				fclose($handle);
+				if($write_new_file)
+				{
+					$fh=fopen($ovpn,'w');
+					foreach($linebuffer as $line)
+					{
+						fwrite($fh,$line."\n");
+					}
+					fclose($fh);
+				}
+			} 
 		}
 	}
 	
