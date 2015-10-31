@@ -251,17 +251,26 @@ class crypto
 		{
 			case ZipArchive::ER_NOZIP :
 				echo 'not a zip archive';
+				$this->CleanupUploadWorkdir();
 				return false;
 			case ZipArchive::ER_INCONS :
 				echo 'consistency check failed';
+				$this->CleanupUploadWorkdir();
 				return false;
 			case ZipArchive::ER_CRC :
 				echo 'checksum failed';
+				$this->CleanupUploadWorkdir();
 				return false;
 		}
 		$zip->extractTo(VPN_CONF_MNT);
 		$zip->close();
+		$this->CleanupUploadWorkdir();
 		return true;
+	}
+	
+	private function CleanupUploadWorkdir()
+	{
+		exec('rm -rf '.UPLOAD_WORKDIR.'*');
 	}
 }
 ?>
