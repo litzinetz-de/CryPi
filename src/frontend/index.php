@@ -130,7 +130,7 @@ if($_GET['do']=='vpn')
 		$cl_empty=false;
 	}
 	
-	if($c->CedentialsAvailable())
+	if($c->CredentialsAvailable())
 	{
 		$cred_avail=true;
 	} else {
