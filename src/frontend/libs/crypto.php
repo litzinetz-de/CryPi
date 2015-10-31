@@ -247,6 +247,18 @@ class crypto
 		}
 		$zip = new ZipArchive;
 		if(!$res = $zip->open($vpn_filepath)) return false;
+		switch($res)
+		{
+			case ZipArchive::ER_NOZIP :
+				echo 'not a zip archive';
+				return false;
+			case ZipArchive::ER_INCONS :
+				echo 'consistency check failed';
+				return false;
+			case ZipArchive::ER_CRC :
+				echo 'checksum failed';
+				return false;
+		}
 		$zip->extractTo(VPN_CONF_MNT);
 		$zip->close();
 		return true;
