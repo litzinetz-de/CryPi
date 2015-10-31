@@ -208,7 +208,7 @@ class crypto
 					$fh=fopen($ovpn,'w');
 					foreach($linebuffer as $line)
 					{
-						fwrite($fh,$line."\n");
+						fwrite($fh,$line);
 					}
 					fclose($fh);
 				}
