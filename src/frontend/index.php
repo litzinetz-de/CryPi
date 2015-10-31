@@ -118,11 +118,6 @@ if($_GET['do']=='vpn')
 		$g->SysMSG('Please mount or create a container first');
 		die();
 	}
-	if(!$configlist=$c->FindConfigs())
-	{
-		$g->SysMSG('Please mount or create a container first');
-		die();
-	}
 	if(empty($configlist))
 	{
 		$cl_empty=true;
