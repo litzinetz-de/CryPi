@@ -18,6 +18,11 @@ class crypto
 		return $filename;
 	}
 	
+	public function CleanupDotDot($path)
+	{
+		return str_replace('..','',$path);
+	}
+	
 	public function ReadContainers()
 	{
 		$containerlist=array();
@@ -196,6 +201,7 @@ class crypto
 	
 	public function StartVPN($configfile)
 	{
+		$configfile=$this->CleanupDotDot(VPN_CONF_MNT.$configfile);
 		chdir(dirname($configfile));
 		//$cmd='cd '.dirname($configfile).' && sudo '.OVPN_BIN.' '.$configfile.' 2> '.CRYPI_LOGFILE.' &';
 		exec('sudo '.OVPN_BIN.' '.$configfile.' > /dev/null 2>&1 &');

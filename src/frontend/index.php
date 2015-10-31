@@ -138,11 +138,11 @@ if($_GET['do']=='vpn')
 		$msg='Before we can connect to a VPN, there are still some steps to complete:<br><br>';
 		if($cl_empty)
 		{
-			$msg=$msg.'<li>I don\'t see any vpn configs in this container yet. Please upload your VPN config bundle that you have got from your VPN provider below. It must be an OpenVPN package. I will sort it and find the config files, which must end with &quot;.ovpn&quot;.</li>';
+			$msg=$msg.'<li><font color="red">I don\'t see any vpn configs in this container yet. Please upload your VPN config bundle that you have got from your VPN provider below. It must be an OpenVPN package. I will sort it and find the config files, which must end with &quot;.ovpn&quot;.</font></li>';
 		}
 		if(!$cred_avail)
 		{
-			$msg=$msg.'<li>You have not provided the login credentials for your VPN provider. I need them to setup a VPN connection. No worries, I will store them inside the encrypted container.</li>';
+			$msg=$msg.'<li><font color="red">You have not provided the login credentials for your VPN provider. I need them to setup a VPN connection. No worries, I will store them inside the encrypted container.</font></li>';
 		}
 		echo $msg;
 		$g->SysMSG('<br>Please complete the steps mentioned above and we will try it again.');
@@ -170,6 +170,16 @@ if($_GET['do']=='vpn_upload')
 	} else {
 		$g->SysMSG('Upload failed! Is is a ZIP file? File corrupted? Too large?');
 	}
+}
+
+if($_GET['do']=='vpn_connect')
+{
+	if(trim($_POST['vpn_config'])=='')
+	{
+		$g->SysMSG('No config selected');
+		die();
+	}
+	$c->StartVPN($_POST['vpn_config']);
 }
 
 $g->GlobalFooter();
