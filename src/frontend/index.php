@@ -148,8 +148,8 @@ if($_GET['do']=='vpn')
 		{
 			$msg=$msg.'<li>You have not provided the login credentials for your VPN provider. I need them to setup a VPN connection. No worries, I will store them inside the encrypted container.</li>';
 		}
-		$msg=$msg.'<br>Please complete the steps mentioned above and we will try it again.';
-		$g->SysMSG($msg);
+		echo $msg;
+		$g->SysMSG('<br>Please complete the steps mentioned above and we will try it again.');
 	}
 	
 }
