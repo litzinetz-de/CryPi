@@ -247,7 +247,7 @@ class crypto
 		}
 		$zip = new ZipArchive;
 		if(!$res = $zip->open($vpn_filepath)) return false;
-		switch($res)
+		/*switch($res)
 		{
 			case ZipArchive::ER_NOZIP :
 				echo 'not a zip archive';
@@ -261,7 +261,7 @@ class crypto
 				echo 'checksum failed';
 				$this->CleanupUploadWorkdir();
 				return false;
-		}
+		}*/
 		$zip->extractTo(VPN_CONF_MNT);
 		$zip->close();
 		$this->CleanupUploadWorkdir();
