@@ -1,23 +1,20 @@
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides:          crypi_ramdisk
+# Provides:          crypi_init
 # Required-Start:    $local_fs $network $named $time $syslog
 # Required-Stop:     $local_fs $network $named $time $syslog
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Description:       Sets IPv4 addresses like configured in CryPi settings
+# Description:       Runs the CryPi related stuff at boot
 ### END INIT INFO
  
 start() {
-  mount -t tmpfs -o size=15M none /crypi/upload_tmp
-  mount -t tmpfs -o size=50M none /crypi/upload_workdir
-  chown www-data:www-data /crypi/upload_tmp
-  chown www-data:www-data /crypi/upload_workdir
+  /crypi/scripts/crypi_networking start
+  /crypi/scripts/crypi_ramdisk start
 }
  
 stop() {
-  umount /crypi/upload_tmp
-  umount /crypi/upload_workdir/
+  /crypi/scripts/crypi_ramdisk stop
 }
  
 case "$1" in
@@ -27,7 +24,7 @@ case "$1" in
   stop)
     stop
     ;;
-  retart)
+  restart)
     stop
     start
     ;;
