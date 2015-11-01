@@ -1,2 +1,41 @@
 #!/bin/bash
 
+start() {
+  echo $$ > /crypi/data/routing_watchdog.pid
+  bypass_vpn=`cat /crypi/data/bypass_vpn.dat`
+  
+  if [ "$bypass_vpn" == "false" ] then
+    iptables -t mangle -A POSTROUTING -p icmp --icmp-type redirect -j DROP
+    while :
+    do
+      $buffer=`ip link show dev tun0`
+
+      if [[ $string == *"does not exist"* ]]
+        then
+	  echo "tunnel down"
+        else
+          echo "tunnel up"
+	fi
+      sleep 5
+    done
+  fi
+}
+ 
+stop() {
+  echo "Nothing to do here..."
+}
+ 
+case "$1" in
+  start)
+    start 
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    //stop
+    start
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart}"
+esac

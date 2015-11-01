@@ -12,10 +12,12 @@ start() {
    chmod u+x /crypi/scripts/*
   /crypi/scripts/crypi_networking start
   /crypi/scripts/crypi_ramdisk start
+  /crypi/scripts/crypi_routing_watchdog start
 }
  
 stop() {
   /crypi/scripts/crypi_ramdisk stop
+  /crypi/scripts/crypi_routing_watchdog stop
 }
  
 case "$1" in
