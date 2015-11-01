@@ -4,13 +4,13 @@ start() {
   echo $$ > /crypi/data/routing_watchdog.pid
   bypass_vpn=`cat /crypi/data/bypass_vpn.dat`
   
-  if [ "$bypass_vpn" == "false" ] then
+  if [ "$bypass_vpn" == "false" ]; then
     iptables -t mangle -A POSTROUTING -p icmp --icmp-type redirect -j DROP
     while :
     do
-      $buffer=`ip link show dev tun0`
+      buffer=`ip link show dev tun0`
 
-      if [[ $string == *"does not exist"* ]]
+      if [[ $buffer == *"does not exist"* ]];
         then
 	  echo "tunnel down"
         else
