@@ -8,13 +8,13 @@ start() {
     iptables -t mangle -A POSTROUTING -p icmp --icmp-type redirect -j DROP
     while :
     do
-      buffer=`ip link show dev tun0`
+      buffer=`ip link show dev tun0 2> /dev/null`
 
-      if [[ $buffer == *"does not exist"* ]];
+      if [[ $? == 0 ]];
         then
-	  echo "tunnel down"
+	  echo "tunnel up"
         else
-          echo "tunnel up"
+          echo "tunnel down"
 	fi
       sleep 5
     done
