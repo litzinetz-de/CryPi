@@ -3,6 +3,7 @@
 define('TC_BIN','/usr/bin/truecrypt');
 define('OVPN_BIN','/usr/sbin/openvpn');
 define('PKILL_BIN','/usr/bin/pkill');
+define('IPTABLES_BIN','/sbin/iptables');
 
 define('VPN_CONF_BASEDIR','/crypi/');
 

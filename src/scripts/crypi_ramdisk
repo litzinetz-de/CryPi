@@ -1,0 +1,28 @@
+#!/bin/sh
+ 
+start() {
+  mount -t tmpfs -o size=15M none /crypi/upload_tmp
+  mount -t tmpfs -o size=50M none /crypi/upload_workdir
+  chown www-data:www-data /crypi/upload_tmp
+  chown www-data:www-data /crypi/upload_workdir
+}
+ 
+stop() {
+  umount /crypi/upload_tmp
+  umount /crypi/upload_workdir/
+}
+ 
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    stop
+    start
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart}"
+esac
