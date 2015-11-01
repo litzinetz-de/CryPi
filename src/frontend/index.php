@@ -21,18 +21,27 @@ if($_GET['do']=='system')
 {
 	if($_GET['write']!='y')
 	{
-		$buffer=$c->GetNetworkSettings();
+		$network_buffer=$c->GetNetworkSettings();
+		$bypass_vpn_buffer=$c->GetBypassVPN();
+		if($bypass_vpn_buffer)
+		{
+			$bypass_checked=' checked';
+		} else {
+			$bypass_checked='';
+		}
 		echo '<form action="?do=system&write=y" method="post"><table border="0">
 		<tr class="tableheader"><td colspan="2"><b>Network settings</b></td></tr>
-		<tr><td>IP address:</td><td><input type="text" name="networking_addr" size="20" class="formstyle" value="'.$buffer['addr'].'"></td></tr>
-		<tr><td>Netmask:</td><td><input type="text" name="networking_mask" size="20" class="formstyle" value="'.$buffer['mask'].'"></td></tr>
-		<tr><td>Gateway:</td><td><input type="text" name="networking_gateway" size="20" class="formstyle" value="'.$buffer['gateway'].'"></td></tr>
+		<tr><td>IP address:</td><td><input type="text" name="networking_addr" size="20" class="formstyle" value="'.$network_buffer['addr'].'"></td></tr>
+		<tr><td>Netmask:</td><td><input type="text" name="networking_mask" size="20" class="formstyle" value="'.$network_buffer['mask'].'"></td></tr>
+		<tr><td>Gateway:</td><td><input type="text" name="networking_gateway" size="20" class="formstyle" value="'.$network_buffer['gateway'].'"></td></tr>
+		<tr><td colspan="2"><hr size="1"></td></tr>
+		<tr><td>Bypass VPN:<br><small>Disable to prevent forwarding traffic when VPN is disconnected</small></td><td><input type="checkbox" name="bypass_vpn" value="y"'.$bypass_checked.'></td></tr>
 		</table>
 		<br><br>
 		<input type="submit" value="Apply" class="formstyle"></form>';
 	} else {
-		$buffer=$c->GetNetworkSettings();
-		if($_POST['networking_addr']!=$buffer['addr'] || $_POST['networking_mask']!=$buffer['mask'] || $_POST['networking_gateway']!=$buffer['gateway'])
+		$network_buffer=$c->GetNetworkSettings();
+		if($_POST['networking_addr']!=$network_buffer['addr'] || $_POST['networking_mask']!=$network_buffer['mask'] || $_POST['networking_gateway']!=$network_buffer['gateway'])
 		{
 			if($c->SetNetworkSettings($_POST['networking_addr'],$_POST['networking_mask'],$_POST['networking_gateway']))
 			{

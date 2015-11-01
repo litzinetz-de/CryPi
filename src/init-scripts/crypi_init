@@ -9,6 +9,7 @@
 ### END INIT INFO
  
 start() {
+   chmod u+x /crypi/scripts/*
   /crypi/scripts/crypi_networking start
   /crypi/scripts/crypi_ramdisk start
 }

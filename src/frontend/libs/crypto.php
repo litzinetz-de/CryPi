@@ -288,6 +288,17 @@ class crypto
 		return true;
 	}
 	
+	public function GetBypassVPN()
+	{
+		$buffer=file_get_contents(DATAPATH.'bypass_vpn.dat');
+		if(trim($buffer)=='true')
+		{
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	/*private function RefreshIPTables()
 	{
 	
