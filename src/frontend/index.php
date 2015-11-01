@@ -51,6 +51,13 @@ if($_GET['do']=='system')
 			}
 			//$c->SetNetworkSettings($_POST['networking_addr'],$_POST['networking_mask'],$_POST['networking_gateway']);
 		}
+		if($_POST['bypass_vpn']=='y')
+		{
+			$bypass_vpn=true;
+		} else {
+			$bypass_vpn=false;
+		}
+		$c->SetBypassVPN($bypass_vpn);
 	}
 }
 
