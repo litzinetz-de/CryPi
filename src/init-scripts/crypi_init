@@ -16,8 +16,8 @@ start() {
 
   bypass_vpn=`cat /crypi/data/bypass_vpn.dat`
   if [ "$bypass_vpn" == "false" ]; then
-    iptables -t mangle -A POSTROUTING -p icmp --icmp-type redirect -j DROP
-    iptables -P FORWARD DROP
+    /sbin/iptables -t mangle -A POSTROUTING -p icmp --icmp-type redirect -j DROP
+    /sbin/iptables -P FORWARD DROP
   fi
 }
  
