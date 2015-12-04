@@ -15,7 +15,7 @@ start() {
   /crypi/scripts/crypi_routing_watchdog start &
 
   bypass_vpn=`cat /crypi/data/bypass_vpn.dat`
-  if [ "$bypass_vpn" == "false" ]; then
+  if [ "$bypass_vpn" = "false" ]; then
     /sbin/iptables -t mangle -A POSTROUTING -p icmp --icmp-type redirect -j DROP
     /sbin/iptables -P FORWARD DROP
   fi
