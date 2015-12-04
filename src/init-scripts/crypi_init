@@ -12,7 +12,7 @@ start() {
    chmod u+x /crypi/scripts/*
   /crypi/scripts/crypi_networking start
   /crypi/scripts/crypi_ramdisk start
-  /crypi/scripts/crypi_routing_watchdog start
+  /crypi/scripts/crypi_routing_watchdog start &
 }
  
 stop() {
