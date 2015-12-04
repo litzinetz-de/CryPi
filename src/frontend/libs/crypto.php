@@ -277,6 +277,33 @@ class crypto
 		}
 	}
 	
+	public function SetBypassVPN($value)
+	{
+		if($value)
+		{
+			if(!@file_put_contents(DATAPATH.'bypass_vpn.dat','true')) return false;
+		} else {
+			if(!@file_put_contents(DATAPATH.'bypass_vpn.dat','false')) return false;
+		}
+		return true;
+	}
+	
+	public function GetBypassVPN()
+	{
+		$buffer=file_get_contents(DATAPATH.'bypass_vpn.dat');
+		if(trim($buffer)=='true')
+		{
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/*private function RefreshIPTables()
+	{
+	
+	}*/
+	
 	public function GetNetworkSettings()
 	{
 		$addr=file_get_contents(DATAPATH.'networking_addr.dat');
@@ -321,5 +348,10 @@ class crypto
 	{
 		exec('rm -rf '.UPLOAD_WORKDIR.'*');
 	}
+	
+	/*private function EnableMasquerading()
+	{
+		exec('sudo '.IPTABLES_BIN.' -t nat -A POSTROUTING -o tun0 -j MASQUERADE');
+	}*/
 }
 ?>

@@ -1,0 +1,44 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          crypi_init
+# Required-Start:    $local_fs $network $named $time $syslog
+# Required-Stop:     $local_fs $network $named $time $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Description:       Runs the CryPi related stuff at boot
+### END INIT INFO
+ 
+start() {
+   chmod u+x /crypi/scripts/*
+  /crypi/scripts/crypi_networking start
+  /crypi/scripts/crypi_ramdisk start
+  /crypi/scripts/crypi_routing_watchdog start &
+
+  /sbin/iptables -t nat -A POSTROUTING -o tun0 -j MASQUERADE
+
+  bypass_vpn=`cat /crypi/data/bypass_vpn.dat`
+  if [ "$bypass_vpn" = "false" ]; then
+    /sbin/iptables -t mangle -A POSTROUTING -p icmp --icmp-type redirect -j DROP
+    /sbin/iptables -P FORWARD DROP
+  fi
+}
+ 
+stop() {
+  /crypi/scripts/crypi_ramdisk stop
+  /crypi/scripts/crypi_routing_watchdog stop
+}
+ 
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    stop
+    start
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart}"
+esac
