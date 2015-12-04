@@ -13,6 +13,12 @@ start() {
   /crypi/scripts/crypi_networking start
   /crypi/scripts/crypi_ramdisk start
   /crypi/scripts/crypi_routing_watchdog start &
+
+  bypass_vpn=`cat /crypi/data/bypass_vpn.dat`
+  if [ "$bypass_vpn" == "false" ]; then
+    iptables -t mangle -A POSTROUTING -p icmp --icmp-type redirect -j DROP
+    iptables -P FORWARD DROP
+  fi
 }
  
 stop() {
