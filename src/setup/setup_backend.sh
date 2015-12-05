@@ -22,13 +22,13 @@ fresh_install_generic()
   chmod ugo+x /etc/init.d/crypi_init
   update-rc.d crypi_init defaults
   echo "Creating crypi directories"
-  mkdir /crypi
-  mkdir /crypi/data
-  mkdir /crypi/enc
-  mkdir /crypi/mnt
-  mkdir /crypi/scripts
-  mkdir /crypi/upload_tmp
-  mkdir /crypi/upload_workdir
+  mkdir /crypi 2> /dev/null
+  mkdir /crypi/data 2> /dev/null
+  mkdir /crypi/enc 2> /dev/null
+  mkdir /crypi/mnt 2> /dev/null
+  mkdir /crypi/scripts 2> /dev/null
+  mkdir /crypi/upload_tmp 2> /dev/null
+  mkdir /crypi/upload_workdir 2> /dev/null
   echo "Installing crypi scripts"
   cp crypi_repo/src/scripts/* /crypi/scripts
   chown -R www-data:www-data /crypi
@@ -45,7 +45,7 @@ fresh_install_generic()
   perl -p -i.bak -e 's/;upload_tmp_dir =/upload_tmp_dir = \/crypi\/upload\/tmp\/ /' /etc/php5/apache2/php.ini
   perl -p -i.bak -e 's/upload_max_filesize = 2M/upload_max_filesize = 20M /' /etc/php5/apache2/php.ini
   perl -p -i.bak -e 's/post_max_size = 8M/post_max_size = 20M /' /etc/php5/apache2/php.ini
-  perl -p -i.bak -e 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1 /' /etc/php5/apache2/php.ini
+  perl -p -i.bak -e 's/\#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1 /' /etc/php5/apache2/php.ini
 }
 
 ########################
