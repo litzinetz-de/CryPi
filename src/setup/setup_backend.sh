@@ -7,7 +7,7 @@ fresh_install_generic()
   echo -e "\033[0;33mI will now install some software and upgrade the system."
   echo -e "Hit enter to continue.\033[0;37m"
   read
-  apt-get install apache2
+  apt-get install apache2 php5
   wwwdir=$(apachectl -S 2> /dev/null | grep "Main DocumentRoot" | sed -e 's/\<Main DocumentRoot\>//g' | sed s/://g | sed 's/ //g' | sed 's/\"//g')
   echo -e "\033[0;33mDone. I will now start installing CryptoPi."
   echo -e "Hit enter to continue.\033[0;37m"
@@ -38,6 +38,14 @@ fresh_install_generic()
   echo "192.168.0.254" > /crypi/data/networking_addr.dat
   echo "255.255.255.0" > /crypi/data/networking_mask.dat
   echo "192.168.0.1" > /crypi/data/networking_gateway.dat
+  
+  echo -e "\033[0;33mDone. I will now modify PHP's an the system's config files to fit our needs."
+  echo -e "Hit enter to continue.\033[0;37m"
+  read
+  perl -p -i.bak -e 's/;upload_tmp_dir =/upload_tmp_dir = \/crypi\/upload\/tmp\/ /' /etc/php5/apache2/php.ini
+  perl -p -i.bak -e 's/upload_max_filesize = 2M/upload_max_filesize = 20M /' /etc/php5/apache2/php.ini
+  perl -p -i.bak -e 's/post_max_size = 8M/post_max_size = 20M /' /etc/php5/apache2/php.ini
+  perl -p -i.bak -e 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1 /' /etc/php5/apache2/php.ini
 }
 
 ########################
