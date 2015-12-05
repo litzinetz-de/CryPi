@@ -14,8 +14,7 @@ echo "cloning/updating github repository"
 
 if [ ! -d crypi_repo/.git ]
 then
-    mkdir crypi_repo
-    git clone https://github.com/litzinetz-de/CryPi.git crypy_repo
+    git clone https://github.com/litzinetz-de/CryPi.git crypi_repo
 else
     cd crypi_repo
     git pull origin master
