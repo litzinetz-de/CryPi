@@ -12,9 +12,9 @@ apt-get -y install git
 
 echo "cloning/updating github repository"
 
-if [ ! -d crypy_repo/.git ]
+if [ ! -d crypi_repo/.git ]
 then
-    mkdir crypy_repo
+    mkdir crypi_repo
     git clone https://github.com/litzinetz-de/CryPi.git crypy_repo
 else
     cd crypi_repo
