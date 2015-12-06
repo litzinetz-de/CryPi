@@ -47,6 +47,8 @@ fresh_install_generic()
   perl -p -i.bak -e 's/post_max_size = 8M/post_max_size = 20M /' /etc/php5/apache2/php.ini
   perl -p -i.bak -e 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1 /' /etc/sysctl.conf
   
+  ## TODO: sudo
+  
   echo -e "\033[0;33mOn which platform are we working now? Please choose between:"
   echo -e "Rapberry Pi (rpi), x86 or x64:\033[0;37m"
   
