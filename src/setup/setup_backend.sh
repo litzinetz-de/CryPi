@@ -73,6 +73,8 @@ fresh_install_generic()
     echo "www-data ALL = NOPASSWD: /usr/bin/pkill openvpn" >> /etc/sudoers
   fi
   
+  /etc/init.d/sudo restart
+  
   echo -e "\033[0;33mOn which platform are we working now? Please choose between:"
   echo -e "Rapberry Pi (rpi), x86 or x64:\033[0;37m"
   
