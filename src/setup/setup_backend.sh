@@ -7,7 +7,7 @@ fresh_install_generic()
   echo -e "\033[0;33mI will now install some software and upgrade the system."
   echo -e "Hit enter to continue.\033[0;37m"
   read
-  apt-get install apache2 php5 perl sudo
+  apt-get -y install apache2 php5 perl sudo
   wwwdir=$(apachectl -S 2> /dev/null | grep "Main DocumentRoot" | sed -e 's/\<Main DocumentRoot\>//g' | sed s/://g | sed 's/ //g' | sed 's/\"//g')
   echo -e "\033[0;33mDone. I will now start installing CryptoPi."
   echo -e "Hit enter to continue.\033[0;37m"
