@@ -46,6 +46,28 @@ fresh_install_generic()
   perl -p -i.bak -e 's/upload_max_filesize = 2M/upload_max_filesize = 20M /' /etc/php5/apache2/php.ini
   perl -p -i.bak -e 's/post_max_size = 8M/post_max_size = 20M /' /etc/php5/apache2/php.ini
   perl -p -i.bak -e 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1 /' /etc/sysctl.conf
+  
+  echo -e "\033[0;33mOn which platform are we working now? Please choose between:"
+  echo -e "Rapberry Pi (rpi), x86 or x64:\033[0;37m"
+  
+  read -p "[rpi,x86,x64]:" platform_type
+  
+  if [ "$platform_type" = "rpi" ]
+  then
+    cp crypi_repo/bin/rpi/truecrypt /usr/bin/
+    chmod ugo+x /usr/bin/truecrypt
+  elif [ "$platform_type" = "x86" ]
+  then
+    cp crypi_repo/bin/x86/truecrypt /usr/bin/
+    chmod ugo+x /usr/bin/truecrypt
+  elif [ "$platform_type" = "x64" ]
+  then
+    cp crypi_repo/bin/x64/truecrypt /usr/bin/
+    chmod ugo+x /usr/bin/truecrypt
+  else
+    echo "Wrong value. Please start setup again. Will now exit."
+    exit 1
+  fi
 }
 
 ########################
