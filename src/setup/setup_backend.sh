@@ -47,7 +47,31 @@ fresh_install_generic()
   perl -p -i.bak -e 's/post_max_size = 8M/post_max_size = 20M /' /etc/php5/apache2/php.ini
   perl -p -i.bak -e 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1 /' /etc/sysctl.conf
   
-  ## TODO: sudo
+  grep "www-data ALL = NOPASSWD: /usr/bin/truecrypt" /etc/sudoers > /dev/null
+  if [ $? -eq 1 ]
+  then
+    echo "www-data ALL = NOPASSWD: /usr/bin/truecrypt" >> /etc/sudoers
+  fi
+  grep "www-data ALL = NOPASSWD: /sbin/ifconfig" /etc/sudoers > /dev/null
+  if [ $? -eq 1 ]
+  then
+    echo "www-data ALL = NOPASSWD: /sbin/ifconfig" >> /etc/sudoers
+  fi
+  grep "www-data ALL = NOPASSWD: /sbin/route" /etc/sudoers > /dev/null
+  if [ $? -eq 1 ]
+  then
+    echo "www-data ALL = NOPASSWD: /sbin/route" >> /etc/sudoers
+  fi
+  grep "www-data ALL = NOPASSWD: /usr/sbin/openvpn" /etc/sudoers > /dev/null
+  if [ $? -eq 1 ]
+  then
+    echo "www-data ALL = NOPASSWD: /usr/sbin/openvpn" >> /etc/sudoers
+  fi
+  grep "www-data ALL = NOPASSWD: /usr/bin/pkill openvpn" /etc/sudoers > /dev/null
+  if [ $? -eq 1 ]
+  then
+    echo "www-data ALL = NOPASSWD: /usr/bin/pkill openvpn" >> /etc/sudoers
+  fi
   
   echo -e "\033[0;33mOn which platform are we working now? Please choose between:"
   echo -e "Rapberry Pi (rpi), x86 or x64:\033[0;37m"
