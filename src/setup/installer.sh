@@ -7,7 +7,7 @@ echo "Hit enter to continue."
 read
 
 apt-get update
-apt-get upgrade
+apt-get -y upgrade
 apt-get -y install git
 
 echo "cloning/updating github repository"
