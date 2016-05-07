@@ -38,6 +38,7 @@ fresh_install_generic()
   echo "192.168.0.254" > /crypi/data/networking_addr.dat
   echo "255.255.255.0" > /crypi/data/networking_mask.dat
   echo "192.168.0.1" > /crypi/data/networking_gateway.dat
+  chown -R www-data:www-data /crypi/
   
   echo -e "\033[0;33mDone. I will now modify PHP's an the system's config files to fit our needs."
   echo -e "Hit enter to continue.\033[0;37m"
@@ -96,6 +97,17 @@ fresh_install_generic()
     echo "Wrong value. Please start setup again. Will now exit."
     exit 1
   fi
+
+  echo -e "\033[1;31m====================="
+  echo -e "\033[1;31mInstallation finished"
+  echo -e "\033[1;31m====================="
+  echo
+  echo -e "\033[0;37mTo complete installation, please reboot the system now." 
+  echo
+  echo -e "\033[0;31mPLEASE NOTE: After rebooting, the device will have an IP address of 192.168.0.254" 
+  echo -e "\033[0;37mYou can change the IP address using the web interface, either now (current IP) or after rebooting (IP above)." 
+  echo
+  echo -e "Hope, you will enjoy CryptoPi. Your feedback is appreciated! info@litzinetz.de\033[0;37m"
 }
 
 ########################
