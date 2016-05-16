@@ -110,6 +110,30 @@ fresh_install_generic()
   echo -e "Hope, you will enjoy CryptoPi. Your feedback is appreciated! info@litzinetz.de\033[0;37m"
 }
 
+update_generic()
+{
+	echo -e "\033[0;33mI will now update CryptoPi to the current version of the chosen branch."
+	echo -e "Hit enter to continue.\033[0;37m"
+	read
+	wwwdir=$(apachectl -S 2> /dev/null | grep "Main DocumentRoot" | sed -e 's/\<Main DocumentRoot\>//g' | sed s/://g | sed 's/ //g' | sed 's/\"//g')
+	echo "Updating web frontend"
+	cp -R crypi_repo/src/frontend/* $wwwdir
+	chown -R www-data:www-data $wwwdir
+	echo "Updating init scripts"
+	cp crypi_repo/src/init-scripts/crypi_init /etc/init.d/
+	echo "Updating crypi scripts"
+	cp crypi_repo/src/scripts/* /crypi/scripts
+	chown -R www-data:www-data /crypi
+	chmod u+x /crypi/scripts/*
+	
+	echo -e "\033[1;31m==============="
+	echo -e "\033[1;31mUpdate finished"
+	echo -e "\033[1;31m==============="
+	echo
+	echo -e "\033[0;37mYour system is up to date now. A reboot is not required." 
+	echo -e "Hope, you will enjoy CryptoPi. Your feedback is appreciated! info@litzinetz.de\033[0;37m"
+}
+
 ########################
 
 echo -e "\033[1;31m=============="
@@ -127,7 +151,7 @@ then
   fresh_install_generic
 elif [ "$install_type" = "u" ]
 then
-  echo "Upgrade"
+  update_generic
 else
   echo "Wrong value. Please start setup again. Will now exit."
   exit 1
