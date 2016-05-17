@@ -2,6 +2,45 @@
 
 # CryPi installer
 
+######################## Internal functions
+
+init_patchlist()
+{
+	touch /crypi/patchlist.dat
+	chmod ugo+r /crypi/patchlist.dat	
+}
+
+is_patched()
+{
+	if grep -Fxq "$1" /crypi/patchlist.dat
+	then
+		return 0
+	else
+		return 1
+	fi
+}
+
+set_patched()
+{
+	echo $1 >> /crypi/patchlist.dat
+}
+
+######################## Patches
+
+#patch_skel_0-0-0()
+#{
+#	echo -e "Installing patch skel_0-0-0..."
+#	if is_patched p_skel_0-0-0 ;
+#	then
+#		echo -e "Already patched."
+#	else
+#		set_patched p_skel_0-0-0
+#		# ...
+#	fi
+#}
+
+######################## Install and update functions
+
 fresh_install_generic()
 {
   echo -e "\033[0;33mI will now install some software and upgrade the system."
@@ -29,6 +68,7 @@ fresh_install_generic()
   mkdir /crypi/scripts 2> /dev/null
   mkdir /crypi/upload_tmp 2> /dev/null
   mkdir /crypi/upload_workdir 2> /dev/null
+  init_patchlist
   echo "Installing crypi scripts"
   cp crypi_repo/src/scripts/* /crypi/scripts
   chown -R www-data:www-data /crypi
@@ -126,6 +166,8 @@ update_generic()
 	chown -R www-data:www-data /crypi
 	chmod u+x /crypi/scripts/*
 	
+	init_patchlist
+	
 	echo -e "\033[1;31m==============="
 	echo -e "\033[1;31mUpdate finished"
 	echo -e "\033[1;31m==============="
@@ -134,7 +176,7 @@ update_generic()
 	echo -e "Hope, you will enjoy CryptoPi. Your feedback is appreciated! info@litzinetz.de\033[0;37m"
 }
 
-########################
+######################## Main functions
 
 echo -e "\033[1;31m=============="
 echo -e "\033[1;31mCryptoPi setup"
