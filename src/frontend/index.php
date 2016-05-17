@@ -63,12 +63,12 @@ if($_GET['do']=='network')
 
 if($_GET['do']=='static_routes')
 {
-	echo '<tr class="tableheader"><td colspan="4"><b>Static routes</b></td></tr>
+	echo '<table><tr class="tableheader"><td colspan="4"><b>Static routes</b></td></tr>
 	<tr class="tableheader"><td>Network</td><td>Netmask</td><td>Gateway</td><td>&nbsp;</td></tr>';
 	$buffer=$c->GetStaticRoutes();
 	foreach($buffer as $line)
 	{
-		echo '<tr><td>'.$buffer[0].'</td><td>'.$buffer[1].'</td><td>'.$buffer[2].'</td><td>&nbsp;</td></tr>';
+		echo '<tr><td>'.$line[0].'</td><td>'.$line[1].'</td><td>'.$line[2].'</td><td>&nbsp;</td></tr>';
 	}
 	echo '</table>';
 }
