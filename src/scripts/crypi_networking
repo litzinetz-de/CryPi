@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
  
 start() {
 	# Set network settings
@@ -16,6 +16,7 @@ start() {
 		do
 			IFS=';' read -a buffer <<< "${i}"
 			sudo /sbin/route add -net ${buffer[0]} netmask ${buffer[1]} gw ${buffer[2]}
+			echo "Setting route for ${buffer[0]} with mask ${buffer[1]}"
 		done
 	fi
 }

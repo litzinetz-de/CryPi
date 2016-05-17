@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ### BEGIN INIT INFO
 # Provides:          crypi_init
 # Required-Start:    $local_fs $network $named $time $syslog
