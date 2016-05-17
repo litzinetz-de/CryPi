@@ -1,11 +1,24 @@
-#!/bin/sh
+#!/bin/bash
  
 start() {
-  net_addr=`cat /crypi/data/networking_addr.dat`
-  net_mask=`cat /crypi/data/networking_mask.dat`
-  net_gw=`cat /crypi/data/networking_gateway.dat`
-  sudo /sbin/ifconfig eth0 $net_addr netmask $net_mask
-  sudo /sbin/route add default gw $net_gw
+	# Set network settings
+	net_addr=`cat /crypi/data/networking_addr.dat`
+	net_mask=`cat /crypi/data/networking_mask.dat`
+	net_gw=`cat /crypi/data/networking_gateway.dat`
+	sudo /sbin/ifconfig eth0 $net_addr netmask $net_mask
+	sudo /sbin/route add default gw $net_gw
+	
+	# Apply IPv4 routes
+	if [ -e "/crypi/data/networking_ipv4routes.dat" ]
+	then
+		mapfile -t routeslist < /crypi/data/networking_ipv4routes.dat
+		for i in "${routeslist[@]}"
+		do
+			IFS=';' read -a buffer <<< "${i}"
+			sudo /sbin/route add -net ${buffer[0]} netmask ${buffer[1]} gw ${buffer[2]}
+			echo "Setting route for ${buffer[0]} with mask ${buffer[1]}"
+		done
+	fi
 }
  
 stop() {

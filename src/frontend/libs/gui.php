@@ -50,7 +50,10 @@ class GUI
 		<br>
 		<li><a href="?do=vpn">VPN management</a></li>
 		<br>
-		<li><a href="?do=system">System settings</a></li>
+		<li><a href="?do=network">Networking</a></li>
+		<ul>
+			<li><a href="?do=static_routes">Static routes</a></li>
+		</ul>
 		<br>
 		<li><a href="?do=logout">Logout</a>';
 	}
