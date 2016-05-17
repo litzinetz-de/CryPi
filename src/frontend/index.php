@@ -17,7 +17,7 @@ if($_GET['do']=='')
 {
 	$g->IndexPage();
 }
-if($_GET['do']=='system')
+if($_GET['do']=='network')
 {
 	if($_GET['write']!='y')
 	{
@@ -29,13 +29,13 @@ if($_GET['do']=='system')
 		} else {
 			$bypass_checked='';
 		}
-		echo '<form action="?do=system&write=y" method="post"><table border="0">
+		echo '<form action="?do=network&write=y" method="post"><table border="0">
 		<tr class="tableheader"><td colspan="2"><b>Network settings</b></td></tr>
 		<tr><td>IP address:</td><td><input type="text" name="networking_addr" size="20" class="formstyle" value="'.$network_buffer['addr'].'"></td></tr>
 		<tr><td>Netmask:</td><td><input type="text" name="networking_mask" size="20" class="formstyle" value="'.$network_buffer['mask'].'"></td></tr>
 		<tr><td>Gateway:</td><td><input type="text" name="networking_gateway" size="20" class="formstyle" value="'.$network_buffer['gateway'].'"></td></tr>
 		<tr><td colspan="2"><hr size="1"></td></tr>
-		<tr><td>Bypass VPN:<br><div width="200px"><small>Disable to prevent forwarding traffic when VPN is disconnected. Disabling this will also disable ICMP redirects. Requires reboot.</small></div></td><td><input type="checkbox" name="bypass_vpn" value="y"'.$bypass_checked.'></td></tr>
+		<tr><td>Bypass VPN:<br><div width="200px"><small>Enable this to allow traffic to bypass the VPN tunnel when it\'s not connected. By default, this is not allowed and also not recommended. Changing this requires a reboot.</small></div></td><td><input type="checkbox" name="bypass_vpn" value="y"'.$bypass_checked.'></td></tr>
 		</table>
 		<br><br>
 		<input type="submit" value="Apply" class="formstyle"></form>';
@@ -59,6 +59,18 @@ if($_GET['do']=='system')
 		}
 		$c->SetBypassVPN($bypass_vpn);
 	}
+}
+
+if($_GET['do']=='static_routes')
+{
+	echo '<tr class="tableheader"><td colspan="4"><b>Static routes</b></td></tr>
+	<tr class="tableheader"><td>Network</td><td>Netmask</td><td>Gateway</td><td>&nbsp;</td></tr>';
+	$buffer=$c->GetStaticRoutes();
+	foreach($buffer as $line)
+	{
+		echo '<tr><td>'.$buffer[0].'</td><td>'.$buffer[1].'</td><td>'.$buffer[2].'</td><td>&nbsp;</td></tr>';
+	}
+	echo '</table>';
 }
 
 if($_GET['do']=='containers')

@@ -8,6 +8,21 @@ class crypto
 		//
 	}
 	
+	public function GetStaticRoutes()
+	{
+		$routelist=array();
+		$handle=fopen(DATAPATH.'networking_ipv4routes.dat','r');
+		if($handle)
+		{
+			while(($line = fgets($handle)) !== false)
+			{
+				$buffer=explode(';',$line);
+				array_push($routelist,$buffer);
+			}
+		}
+		return $routelist;
+	}
+	
 	private function cleanup_filename($filename)
 	{
 		$filename=preg_replace("/[^a-z0-9\.]/", "", strtolower($filename));
