@@ -1,18 +1,18 @@
 # CryptoPi
 
-=== CURRENTLY IN DEVELOPMENT - NOT READY FOR USE YET - CONTRIBUTIONS ARE WELCOME! ===
+=== CURRENTLY IN ALPHA STATE - CONTRIBUTIONS ARE WELCOME! ===
 
 CryptoPi (CryPi) is a web based application written in PHP that helps you to manage OpenVPN connections to secure your internet connection.
 
-Using the web based frontent, you can create secure encrypted containers which are stored on the CryPi. Then, upload your OpenVPN config files to this container and tell CryPi your VPN login credentials (stored secure in the container). After that, CryPi will create the VPN tunnel using OpenVPN and will start acting as a NAT router. Simply configure all the devices in your network to use CryPi as their default gateway - that's all. All the traffic coming to CryPi will then be routed trough the tunnel automatically.
+This software is an appoach to help you setting up a secure VPN tunnel for your whole network, primary by using a VPN provider. Using CryptoPi, you can secure your whole communication against interception.
 
-Due to safety reasons, it's not possible to save a container's password on the device - therefore, you have to unlock the config container every time CryPi boots by entering it's password.
+Another use-case is to provide a public hotspot that you want to be tunneled through a VPN, so you can't be made responsible for something that your users do in your generous provided hotspot.
 
-Create as many containers as you wish. Open one of them and go online using an encrypted VPN tunnel.
+To do so, CryptoPi stores your VPN config in a secure container, builds up the tunnel and then, acting as a router, forwards all the traffic into the tunnel. CryptoPi must then be used as the internet gateway.
 
-Currently, CryPi is only tested with the VPN provider "Perfect Privacy" (which seems to be the best when it comes to anonymity and privacy, but is also very expensive), but should work fine with other providers, too.
+Currently, CryptoPi is only confirmed to work with the VPN provider "Perfect Privacy" (which seems to be the best when it comes to anonymity and privacy, but is also very expensive), but should work fine with other providers, too.
 
-If there's a provider that doesn't work with CryPi and you want to use, just create a testing account and send the credentials to us - we will try to get it work.
+If there's a provider that doesn't work with CryPi and you want to use, just create a testing account and send the credentials to me - I will try to get it work.
 
 Thank you for using this software.
 
