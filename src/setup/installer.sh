@@ -29,7 +29,7 @@ then
     git clone -b $origin_branch https://github.com/litzinetz-de/CryPi.git crypi_repo
 else
     cd crypi_repo
-    git pull origin $origin_branch
+    git fetch origin $origin_branch
     cd ..
 fi
 
