@@ -23,6 +23,33 @@ class crypto
 		return $routelist;
 	}
 	
+	public function StaticRouteExists($network,$netmask)
+	{
+		$handle=fopen(DATAPATH.'networking_ipv4routes.dat','r');
+		if($handle)
+		{
+			while(($line = fgets($handle)) !== false)
+			{
+				$buffer=explode(';',$line);
+				if($buffer[0]==$network && $buffer[1]==$netmask)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public function AddStaticRoute($network,$netmask,$gateway)
+	{
+		// TODO: Check if syntax of params is correct
+		if(trim($network)!='' && trim($netmask)!='' && trim($gateway)!='' && !$this->StaticRouteExists($network,$netmask)) // Parameters not empty and route doesn't exist yet
+		{
+			//file_put_contents(DATAPATH.'networking_ipv4routes.dat', $network.';'.$netmask.';'.$gateway, FILE_APPEND | LOCK_EX);
+			exec('cat "'.$network.';'.$netmask.';'.$gateway.'" >> '.DATAPATH.'networking_ipv4routes.dat');
+		}
+	}
+	
 	private function cleanup_filename($filename)
 	{
 		$filename=preg_replace("/[^a-z0-9\.]/", "", strtolower($filename));

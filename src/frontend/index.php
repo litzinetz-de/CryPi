@@ -63,6 +63,10 @@ if($_GET['do']=='network')
 
 if($_GET['do']=='static_routes')
 {
+	if($_GET['write']=='y')
+	{
+		$c->AddStaticRoute($_POST['network'],$_POST['netmask'],$_POST['gateway']);
+	}
 	echo '<table><tr class="tableheader"><td colspan="4"><b>Static routes</b></td></tr>
 	<tr class="tableheader"><td>Network</td><td>Netmask</td><td>Gateway</td><td>&nbsp;</td></tr>';
 	$buffer=$c->GetStaticRoutes();
@@ -70,7 +74,8 @@ if($_GET['do']=='static_routes')
 	{
 		echo '<tr><td>'.$line[0].'</td><td>'.$line[1].'</td><td>'.$line[2].'</td><td>&nbsp;</td></tr>';
 	}
-	echo '</table>';
+	echo '<tr><td><form action="?do=static_routes&write=y" method="post"><input type="text" name="network" size="20"></td><td><input type="text" name="netmask" size="20"></td><td><input type="text" name="gateway" size="20"></td><td><input type="submit" value="Save"></form></td></tr>
+	</table>';
 }
 
 if($_GET['do']=='containers')

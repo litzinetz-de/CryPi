@@ -11,11 +11,12 @@ apt-get -y upgrade
 apt-get -y install git
 
 echo "Which branch would you like to use?"
-echo "Choose master, if you want the latest stable release. If you would like the current development version, choose dev instead."
-echo "If you don't know, type master here."
-read -p "[master,dev]:" origin_branch
+echo "master: Current stable release (choose this if you don't know what the others are)"
+echo "testing: Current testing release (latest features and bugfixes, but might have issues)"
+echo "dev: Development branch (only use this if you are involved in the development - and only if you know very, very well what you're doing!)"
+read -p "[master,testing,dev]:" origin_branch
 
-if [ "$origin_branch" != "master" ] && [ "$origin_branch" != "dev" ]
+if [ "$origin_branch" != "master" ] && [ "$origin_branch" != "testing" ] && [ "$origin_branch" != "dev" ]
 then
 	echo "Wrong value. Please start setup again. Will now exit."
 	exit 1
